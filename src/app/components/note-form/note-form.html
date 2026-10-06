@@ -1,0 +1,95 @@
+<div class="mb-8 max-w-xl mx-auto">
+  <div class="text-center" *ngIf="!isOpen">
+    <button 
+      (click)="toggleForm()"
+      class="font-pixel text-xs bg-pink-500 hover:bg-pink-400 text-fuchsia-950 font-bold px-6 py-3 border-4 border-pink-200 shadow-[4px_4px_0px_#500724] active:translate-x-1 active:translate-y-1 transition-all mx-auto"
+    >
+      + CREATE_NEW_NOTE.EXE
+    </button>
+  </div>
+
+  <div *ngIf="isOpen" class="bg-fuchsia-900 border-4 border-pink-400 p-6 shadow-[8px_8px_0px_#500724]">
+    <div class="bg-pink-400 text-fuchsia-950 font-pixel text-xs p-2 mb-4 flex justify-between items-center">
+      <span>WRITE_MESSAGE.EXE</span>
+      <button (click)="toggleForm()" class="hover:text-white font-bold">&times;</button>
+    </div>
+
+    <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="space-y-4 font-pixel text-[10px]">
+      <div>
+        <label class="block text-pink-300 uppercase mb-1">TITLE:</label>
+        <input 
+          type="text" 
+          formControlName="title"
+          placeholder="e.g., Why you make me smile"
+          class="w-full bg-fuchsia-950 border-2 border-pink-400 p-2 text-pink-100 font-terminal text-lg focus:outline-none focus:border-cyan-400"
+        />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-pink-300 uppercase mb-1">FROM:</label>
+          <input 
+            type="text" 
+            formControlName="sender"
+            class="w-full bg-fuchsia-950 border-2 border-pink-400 p-2 text-pink-100 font-terminal text-lg focus:outline-none focus:border-cyan-400"
+          />
+        </div>
+        <div>
+          <label class="block text-pink-300 uppercase mb-1">CATEGORY:</label>
+          <select 
+            formControlName="category"
+            class="w-full bg-fuchsia-950 border-2 border-pink-400 p-2 text-pink-100 font-terminal text-lg focus:outline-none focus:border-cyan-400"
+          >
+            <option value="sweet">Sweet</option>
+            <option value="funny">Funny</option>
+            <option value="memories">Memories</option>
+            <option value="future">Future</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-pink-300 uppercase mb-1">MOOD EMOJI:</label>
+        <div class="flex gap-2 flex-wrap bg-fuchsia-950 p-2 border-2 border-pink-400">
+          <button 
+            type="button"
+            *ngFor="let emoji of emojis" 
+            (click)="selectEmoji(emoji)"
+            [class.border-cyan-400]="noteForm.value.moodEmoji === emoji"
+            [class.bg-pink-800]="noteForm.value.moodEmoji === emoji"
+            class="text-xl p-1 border-2 border-transparent hover:border-pink-300"
+          >
+            {{ emoji }}
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-pink-300 uppercase mb-1">MESSAGE:</label>
+        <textarea 
+          formControlName="content" 
+          rows="4"
+          placeholder="Write your sweet note here..."
+          class="w-full bg-fuchsia-950 border-2 border-pink-400 p-2 text-pink-100 font-terminal text-lg focus:outline-none focus:border-cyan-400"
+        ></textarea>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button 
+          type="button" 
+          (click)="toggleForm()"
+          class="px-4 py-2 bg-fuchsia-950 text-pink-400 border-2 border-pink-400 hover:bg-fuchsia-800"
+        >
+          CANCEL
+        </button>
+        <button 
+          type="submit" 
+          [disabled]="noteForm.invalid"
+          class="bg-pink-500 hover:bg-pink-400 disabled:opacity-50 text-fuchsia-950 font-bold px-5 py-2 border-2 border-pink-200"
+        >
+          SAVE_NOTE.DAT 💕
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

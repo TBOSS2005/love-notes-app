@@ -1,0 +1,55 @@
+<div class="counters-container">
+  <!-- Window 1: Days of Love Together -->
+  <div class="retro-window">
+    <div class="window-header">
+      <span>💕 Days of Love 💕</span>
+    </div>
+    <div class="window-body">
+      <div class="timer-grid">
+        <div class="time-box highlight">
+          <span class="number">{{ daysTogether() }}</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="time-box">
+          <span class="number">{{ hoursTogether() }}</span>
+          <span class="label">Hours</span>
+        </div>
+      </div>
+      <p class="sub-text">and counting together!</p>
+    </div>
+  </div>
+
+  <!-- Window 2: Countdown to 1 Year -->
+  <div class="retro-window">
+    <div class="window-header">
+      <span>⏳ 1-Year Anniversary Countdown ⏳</span>
+    </div>
+    <div class="window-body">
+      @if (!isAnniversary()) {
+        <div class="timer-grid">
+          <div class="time-box">
+            <span class="number">{{ countdownDays() }}</span>
+            <span class="label">Days</span>
+          </div>
+          <div class="time-box">
+            <span class="number">{{ countdownHours() }}</span>
+            <span class="label">Hours</span>
+          </div>
+          <div class="time-box">
+            <span class="number">{{ countdownMinutes() }}</span>
+            <span class="label">Mins</span>
+          </div>
+          <div class="time-box">
+            <span class="number">{{ countdownSeconds() }}</span>
+            <span class="label">Secs</span>
+          </div>
+        </div>
+      } @else {
+        <div class="celebration-box">
+          <h2>🎉 Happy 1st Anniversary! 🎉</h2>
+          <p>Here is to forever and more!</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
